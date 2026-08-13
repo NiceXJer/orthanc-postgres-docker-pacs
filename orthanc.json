@@ -1,0 +1,25 @@
+{
+  "Name" : "Orthanc-Docker-Lab",
+  "DicomPort" : 4242,
+  "HttpPort" : 8042,
+  "RemoteAccessAllowed" : true,
+  "AuthenticationEnabled" : true,
+  "RegisteredUsers" : {
+    "admin" : "REMOVED_PASSWORD"
+  },
+  "DicomAlwaysAllowStore" : true,
+  "DicomAlwaysAllowFind"  : true,
+  "DicomAlwaysAllowGet"   : true,
+  "DicomModalities" : {
+    "MICRODICOM" : [ "MICRODICOM", "host.docker.internal", 11113 ]
+  },
+  "PostgreSQL" : {
+    "EnableIndex" : true,
+    "EnableStorage" : false,
+    "Host" : "postgres-db",
+    "Port" : 5432,
+    "Database" : "orthanc_db",
+    "Username" : "orthanc_user",
+    "Password" : "REMOVED_DB_PASSWORD"
+  }
+}

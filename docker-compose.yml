@@ -1,0 +1,49 @@
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: orthanc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: orthanc_db
+      POSTGRES_USER: orthanc_user
+      POSTGRES_PASSWORD: REMOVED_DB_PASSWORD
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - pacs-network
+
+  orthanc-server:
+    image: orthancteam/orthanc:latest
+    container_name: orthanc-core
+    restart: unless-stopped
+    depends_on:
+      - postgres-db
+    ports:
+      - "8042:8042"
+      - "4242:4242"
+    environment:
+      POSTGRESQL_PLUGIN_ENABLED: "true"
+      OHIF_PLUGIN_ENABLED: "true"
+      DICOM_WEB_PLUGIN_ENABLED: "true"
+    volumes:
+      - ./orthanc.json:/etc/orthanc/orthanc.json:ro
+      - orthanc-storage:/var/lib/orthanc/db
+    networks:
+      - pacs-network
+
+  ohif-viewer:
+    image: ohif/viewer:latest
+    container_name: ohif-viewer
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    networks:
+      - pacs-network
+
+networks:
+  pacs-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  orthanc-storage:
