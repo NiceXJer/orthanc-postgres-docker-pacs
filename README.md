@@ -9,18 +9,13 @@ A production-ready PACS (Picture Archiving and Communication System) infrastruct
 The solution separates DICOM binary/metadata storage from web viewing layers while supporting both traditional C-STORE/C-FIND network protocols and modern DICOMweb REST interfaces.
 
 ```mermaid
-flowchart TD
-    A["MicroDicom\nDICOM Viewer / Modality"]
-
-    B["Orthanc Server\nDocker Container\nDICOM: 4242 | HTTP: 8042\nREST API / DICOMweb"]
-
-    C["PostgreSQL 15\nDICOM Index & Metadata DB"]
-
-    D["Integrated OHIF Viewer\nZero-Footprint Web Viewer"]
-
-    A -- "C-ECHO / C-STORE\nC-FIND / C-MOVE" --> B
-    B -- "Indexed Queries" --> C
-    B -- "DICOMweb (WADO-RS/QIDO-RS)" --> D
+flowchart LR
+    A["KIS / RIS Simulator\n(HL7 ADT/ORM or GDT)"] -->|TCP/MLLP or File Drop| B["Mirth Connect\n(Integration Engine)"]
+    B -->|DICOM MWL / REST API| C["Orthanc PACS\n(DICOM Core)"]
+    C <-->|Metadata Index| D[("PostgreSQL 15")]
+    E["Modality / MicroDicom\n(CT/X-Ray)"] -->|DICOM C-FIND (Worklist)| C
+    E -->|DICOM C-STORE (Images)| C
+    C -->|DICOMweb WADO-RS| F["OHIF Web Viewer"]
 ```
 # Orthanc PACS & DICOM Healthcare IT Lab
 
