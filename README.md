@@ -218,33 +218,6 @@ OHIF Web Viewer
 
 ---
 
-## 📚 Documentation
-
-Detailed technical documentation is available in the [`docs/`](docs/) directory:
-
-* [Architecture](docs/architecture.md)
-* [Deployment Guide](docs/deployment.md)
-* [DICOM Testing Runbook](docs/dicom-testing.md)
-* [Mirth / HL7 / FHIR Engineering Notes](docs/mirth-hl7-fhir.md)
-* [Troubleshooting & Resolution Log](docs/troubleshooting.md)
-
----
-
-## 🔮 Future Extensions
-
-Potential next steps for the lab:
-
-* DICOM Modality Worklist (MWL)
-* HL7 ORM → MWL workflow
-* Centralized logging and monitoring
-* Automated database/PACS backups
-* Disaster recovery testing
-* TLS/HTTPS hardening
-* Authentication and authorization
-* Network segmentation
-
----
-
 ## 🎯 Project Goal
 
 This project demonstrates practical understanding of how **PACS,
