@@ -40,6 +40,22 @@ services:
     networks:
       - pacs-network
 
+  mirth-connect:
+    image: nextgenhealthcare/connect:latest
+    container_name: mirth-engine
+    restart: unless-stopped
+    environment:
+      - VMOPTIONS=-Xmx1024m
+    ports:
+      - "8080:8080"   # Mirth Web Dashboard / HTTP API
+      - "8443:8443"   # Mirth Admin Console (HTTPS)
+      - "6661:6661"   # HL7 MLLP Inbound Listener Port
+      - "6662:6662"   # HL7 FHIR 
+    volumes:
+      - mirth-data:/opt/connect/appdata
+    networks:
+      - pacs-network
+
 networks:
   pacs-network:
     driver: bridge
@@ -47,3 +63,4 @@ networks:
 volumes:
   postgres-data:
   orthanc-storage:
+  mirth-data:

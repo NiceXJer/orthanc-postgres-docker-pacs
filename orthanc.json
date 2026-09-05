@@ -3,10 +3,7 @@
   "DicomPort" : 4242,
   "HttpPort" : 8042,
   "RemoteAccessAllowed" : true,
-  "AuthenticationEnabled" : true,
-  "RegisteredUsers" : {
-    "admin" : "REMOVED_PASSWORD"
-  },
+  "AuthenticationEnabled" : false,
   "DicomAlwaysAllowStore" : true,
   "DicomAlwaysAllowFind"  : true,
   "DicomAlwaysAllowGet"   : true,
